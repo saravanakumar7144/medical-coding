@@ -1,0 +1,62 @@
+[
+    {
+        "code": "99213",
+        "description": "Office or other outpatient visit for the evaluation and management of an established patient",
+        "type": "CPT",
+        "text_chunk": "Office or other outpatient visit for the evaluation and management of an established patient, which requires a medically appropriate history and/or examination and low level of medical decision making."
+    },
+    {
+        "code": "99214",
+        "description": "Office or other outpatient visit for the evaluation and management of an established patient",
+        "type": "CPT",
+        "text_chunk": "Office or other outpatient visit for the evaluation and management of an established patient, which requires a medically appropriate history and/or examination and moderate level of medical decision making."
+    },
+    {
+        "code": "36415",
+        "description": "Collection of venous blood by venipuncture",
+        "type": "CPT",
+        "text_chunk": "Collection of venous blood by venipuncture. Standard blood draw procedure using a needle to collect blood from a vein."
+    },
+    {
+        "code": "71020",
+        "description": "Radiologic examination, chest, 2 views, frontal and lateral",
+        "type": "CPT",
+        "text_chunk": "Radiologic examination, chest, 2 views, frontal and lateral. Standard chest X-ray with two views."
+    },
+    {
+        "code": "85025",
+        "description": "Blood count; complete (CBC), automated",
+        "type": "CPT",
+        "text_chunk": "Blood count; complete (CBC), automated. Complete blood count with differential performed by automated methods."
+    },
+    {
+        "code": "80053",
+        "description": "Comprehensive metabolic panel",
+        "type": "CPT",
+        "text_chunk": "Comprehensive metabolic panel. Blood chemistry panel including glucose, electrolytes, kidney and liver function tests."
+    },
+    {
+        "code": "93000",
+        "description": "Electrocardiogram, routine ECG with at least 12 leads",
+        "type": "CPT",
+        "text_chunk": "Electrocardiogram, routine ECG with at least 12 leads; with interpretation and report."
+    },
+    {
+        "code": "45378",
+        "description": "Colonoscopy, flexible",
+        "type": "CPT",
+        "text_chunk": "Colonoscopy, flexible; diagnostic, including collection of specimen(s) by brushing or washing, when performed."
+    },
+    {
+        "code": "76700",
+        "description": "Ultrasound, abdominal, real time with image documentation",
+        "type": "CPT",
+        "text_chunk": "Ultrasound, abdominal, real time with image documentation; complete ultrasound examination of the abdomen."
+    },
+    {
+        "code": "29881",
+        "description": "Arthroscopy, knee, surgical; with meniscectomy",
+        "type": "CPT",
+        "text_chunk": "Arthroscopy, knee, surgical; with meniscectomy (medial AND lateral, including any meniscal shaving) including debridement/shaving of articular cartilage."
+    }
+]

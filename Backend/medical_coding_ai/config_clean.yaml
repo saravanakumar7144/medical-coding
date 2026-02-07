@@ -1,0 +1,40 @@
+# Medical Coding AI Configuration
+
+ollama:
+  model_name: "llama3.2:3b-instruct-q4_0"
+  base_url: "http://localhost:11434"
+  timeout: 120
+
+vector_store:
+  dimension: 384
+  similarity_threshold: 0.7
+  max_results: 15
+
+knowledge_base:
+  icd10_path: "data/knowledge_base/icd10.pdf"
+  cpt_path: "data/knowledge_base/cpt.pdf"
+  hcpcs_path: "data/knowledge_base/hcpcs.pdf"
+  chunk_size: 1000
+  chunk_overlap: 200
+  update_on_startup: false
+
+anonymization:
+  mask_names: true
+  mask_contacts: true
+  mask_addresses: true
+  mask_ids: true
+  placeholder_name: "[PATIENT_NAME]"
+  placeholder_contact: "[CONTACT_XXX]"
+  placeholder_id: "[ID_XXX]"
+  placeholder_address: "[ADDRESS]"
+
+agents:
+  confidence_threshold: 60
+  max_suggestions: 3
+  context_window: 2000
+
+ui:
+  theme: "light"
+  page_title: "Medical Coding AI Assistant"
+  page_icon: "🏥"
+  layout: "wide"

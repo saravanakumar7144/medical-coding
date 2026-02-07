@@ -1,0 +1,62 @@
+[
+    {
+        "code": "E11.9",
+        "description": "Type 2 diabetes mellitus without complications",
+        "type": "ICD-10",
+        "text_chunk": "Type 2 diabetes mellitus without complications. This code is used when a patient has diabetes mellitus that is not insulin dependent and there are no documented complications."
+    },
+    {
+        "code": "I10",
+        "description": "Essential (primary) hypertension",
+        "type": "ICD-10",
+        "text_chunk": "Essential (primary) hypertension. High blood pressure of unknown cause, also called primary or essential hypertension."
+    },
+    {
+        "code": "Z51.11",
+        "description": "Encounter for antineoplastic chemotherapy",
+        "type": "ICD-10",
+        "text_chunk": "Encounter for antineoplastic chemotherapy. Used when a patient receives chemotherapy treatment for cancer."
+    },
+    {
+        "code": "M79.3",
+        "description": "Panniculitis, unspecified",
+        "type": "ICD-10",
+        "text_chunk": "Panniculitis, unspecified. Inflammation of the subcutaneous fat tissue."
+    },
+    {
+        "code": "F32.9",
+        "description": "Major depressive disorder, single episode, unspecified",
+        "type": "ICD-10",
+        "text_chunk": "Major depressive disorder, single episode, unspecified. A single episode of major depression without specific severity designation."
+    },
+    {
+        "code": "J44.0",
+        "description": "Chronic obstructive pulmonary disease with acute lower respiratory infection",
+        "type": "ICD-10",
+        "text_chunk": "Chronic obstructive pulmonary disease with acute lower respiratory infection. COPD complicated by an acute respiratory infection."
+    },
+    {
+        "code": "N18.3",
+        "description": "Chronic kidney disease, stage 3 (moderate)",
+        "type": "ICD-10",
+        "text_chunk": "Chronic kidney disease, stage 3 (moderate). Moderate decrease in kidney function with GFR 30-59."
+    },
+    {
+        "code": "K21.9",
+        "description": "Gastro-esophageal reflux disease without esophagitis",
+        "type": "ICD-10",
+        "text_chunk": "Gastro-esophageal reflux disease without esophagitis. GERD without inflammation of the esophagus."
+    },
+    {
+        "code": "R06.02",
+        "description": "Shortness of breath",
+        "type": "ICD-10",
+        "text_chunk": "Shortness of breath. Difficulty breathing or breathlessness, medically known as dyspnea."
+    },
+    {
+        "code": "M25.511",
+        "description": "Pain in right shoulder",
+        "type": "ICD-10",
+        "text_chunk": "Pain in right shoulder. Localized pain affecting the right shoulder joint and surrounding structures."
+    }
+]

@@ -1,0 +1,51 @@
+code,description,is_billable,category
+I10,Essential (primary) hypertension,TRUE,Diseases of the circulatory system
+E11.9,Type 2 diabetes mellitus without complications,TRUE,Endocrine nutritional and metabolic diseases
+J06.9,Acute upper respiratory infection unspecified,TRUE,Diseases of the respiratory system
+M54.5,Low back pain,TRUE,Diseases of the musculoskeletal system
+J18.9,Pneumonia unspecified organism,TRUE,Diseases of the respiratory system
+K21.0,Gastro-esophageal reflux disease with esophagitis,TRUE,Diseases of the digestive system
+F32.9,Major depressive disorder single episode unspecified,TRUE,Mental behavioral and neurodevelopmental disorders
+J45.909,Unspecified asthma uncomplicated,TRUE,Diseases of the respiratory system
+N39.0,Urinary tract infection site not specified,TRUE,Diseases of the genitourinary system
+R05,Cough,TRUE,Symptoms signs and abnormal clinical findings
+E78.5,Hyperlipidemia unspecified,TRUE,Endocrine nutritional and metabolic diseases
+I25.10,Atherosclerotic heart disease of native coronary artery without angina pectoris,TRUE,Diseases of the circulatory system
+Z23,Encounter for immunization,TRUE,Factors influencing health status
+E11.65,Type 2 diabetes mellitus with hyperglycemia,TRUE,Endocrine nutritional and metabolic diseases
+I48.91,Unspecified atrial fibrillation,TRUE,Diseases of the circulatory system
+F41.9,Anxiety disorder unspecified,TRUE,Mental behavioral and neurodevelopmental disorders
+J44.9,Chronic obstructive pulmonary disease unspecified,TRUE,Diseases of the respiratory system
+M79.3,Panniculitis unspecified,TRUE,Diseases of the musculoskeletal system
+R10.9,Unspecified abdominal pain,TRUE,Symptoms signs and abnormal clinical findings
+G47.33,Obstructive sleep apnea (adult) (pediatric),TRUE,Diseases of the nervous system
+Z00.00,Encounter for general adult medical examination without abnormal findings,TRUE,Factors influencing health status
+M25.561,Pain in right knee,TRUE,Diseases of the musculoskeletal system
+M25.562,Pain in left knee,TRUE,Diseases of the musculoskeletal system
+I50.9,Heart failure unspecified,TRUE,Diseases of the circulatory system
+J02.9,Acute pharyngitis unspecified,TRUE,Diseases of the respiratory system
+R51,Headache,TRUE,Symptoms signs and abnormal clinical findings
+M54.2,Cervicalgia,TRUE,Diseases of the musculoskeletal system
+E03.9,Hypothyroidism unspecified,TRUE,Endocrine nutritional and metabolic diseases
+J20.9,Acute bronchitis unspecified,TRUE,Diseases of the respiratory system
+N18.9,Chronic kidney disease unspecified,TRUE,Diseases of the genitourinary system
+K29.70,Gastritis unspecified without bleeding,TRUE,Diseases of the digestive system
+B34.9,Viral infection unspecified,TRUE,Certain infectious and parasitic diseases
+R53.83,Other fatigue,TRUE,Symptoms signs and abnormal clinical findings
+G43.909,Migraine unspecified not intractable without status migrainosus,TRUE,Diseases of the nervous system
+L03.90,Cellulitis unspecified,TRUE,Diseases of the skin and subcutaneous tissue
+R11.2,Nausea with vomiting unspecified,TRUE,Symptoms signs and abnormal clinical findings
+R42,Dizziness and giddiness,TRUE,Symptoms signs and abnormal clinical findings
+M17.11,Primary osteoarthritis right knee,TRUE,Diseases of the musculoskeletal system
+M17.12,Primary osteoarthritis left knee,TRUE,Diseases of the musculoskeletal system
+R00.0,Tachycardia unspecified,TRUE,Symptoms signs and abnormal clinical findings
+R06.02,Shortness of breath,TRUE,Symptoms signs and abnormal clinical findings
+J03.90,Acute tonsillitis unspecified,TRUE,Diseases of the respiratory system
+K59.00,Constipation unspecified,TRUE,Diseases of the digestive system
+R07.9,Chest pain unspecified,TRUE,Symptoms signs and abnormal clinical findings
+E55.9,Vitamin D deficiency unspecified,TRUE,Endocrine nutritional and metabolic diseases
+H66.90,Otitis media unspecified unspecified ear,TRUE,Diseases of the ear and mastoid process
+L30.9,Dermatitis unspecified,TRUE,Diseases of the skin and subcutaneous tissue
+M62.830,Muscle spasm of back,TRUE,Diseases of the musculoskeletal system
+R50.9,Fever unspecified,TRUE,Symptoms signs and abnormal clinical findings
+J32.9,Chronic sinusitis unspecified,TRUE,Diseases of the respiratory system

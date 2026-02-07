@@ -1,0 +1,50 @@
+code,description,category,rvu_work,rvu_facility
+99213,Office visit established patient level 3,Evaluation and Management,1.30,0.73
+99214,Office visit established patient level 4,Evaluation and Management,1.92,1.10
+99203,Office visit new patient level 3,Evaluation and Management,1.60,0.93
+99204,Office visit new patient level 4,Evaluation and Management,2.60,1.48
+99205,Office visit new patient level 5,Evaluation and Management,3.50,2.00
+99211,Office visit established patient level 1,Evaluation and Management,0.18,0.10
+99212,Office visit established patient level 2,Evaluation and Management,0.70,0.40
+99215,Office visit established patient level 5,Evaluation and Management,2.80,1.60
+36415,Collection of venous blood by venipuncture,Pathology and Laboratory,0.03,0.02
+81003,Urinalysis automated without microscopy,Pathology and Laboratory,0.00,0.00
+85025,Complete blood count with differential,Pathology and Laboratory,0.00,0.00
+87880,Strep A test,Pathology and Laboratory,0.00,0.00
+71046,Chest X-ray 2 views,Radiology,0.22,0.13
+93000,Electrocardiogram routine ECG,Medicine,0.17,0.10
+90471,Immunization administration first vaccine,Medicine,0.17,0.10
+90686,Influenza vaccine quadrivalent,Medicine,0.00,0.00
+90732,Pneumococcal polysaccharide vaccine,Medicine,0.00,0.00
+90837,Psychotherapy 60 minutes,Medicine,2.12,1.21
+90834,Psychotherapy 45 minutes,Medicine,1.50,0.86
+96372,Therapeutic prophylactic or diagnostic injection,Medicine,0.17,0.10
+99441,Telephone E/M physician 5-10 minutes,Evaluation and Management,0.25,0.14
+99442,Telephone E/M physician 11-20 minutes,Evaluation and Management,0.50,0.29
+99443,Telephone E/M physician 21-30 minutes,Evaluation and Management,0.75,0.43
+99381,Initial comprehensive preventive medicine infant,Evaluation and Management,1.50,0.86
+99382,Initial comprehensive preventive medicine 1-4 years,Evaluation and Management,1.60,0.91
+99383,Initial comprehensive preventive medicine 5-11 years,Evaluation and Management,1.50,0.86
+99384,Initial comprehensive preventive medicine 12-17 years,Evaluation and Management,1.70,0.97
+99385,Initial comprehensive preventive medicine 18-39 years,Evaluation and Management,1.60,0.91
+99386,Initial comprehensive preventive medicine 40-64 years,Evaluation and Management,1.92,1.10
+99387,Initial comprehensive preventive medicine 65+ years,Evaluation and Management,2.00,1.14
+99391,Periodic comprehensive preventive medicine infant,Evaluation and Management,1.37,0.78
+99392,Periodic comprehensive preventive medicine 1-4 years,Evaluation and Management,1.50,0.86
+99393,Periodic comprehensive preventive medicine 5-11 years,Evaluation and Management,1.37,0.78
+99394,Periodic comprehensive preventive medicine 12-17 years,Evaluation and Management,1.50,0.86
+99395,Periodic comprehensive preventive medicine 18-39 years,Evaluation and Management,1.50,0.86
+99396,Periodic comprehensive preventive medicine 40-64 years,Evaluation and Management,1.70,0.97
+99397,Periodic comprehensive preventive medicine 65+ years,Evaluation and Management,1.75,1.00
+99024,Postoperative follow-up visit,Evaluation and Management,0.00,0.00
+10060,Incision and drainage of abscess simple,Surgery,1.22,0.70
+10120,Incision and removal of foreign body subcutaneous simple,Surgery,1.22,0.70
+11042,Debridement subcutaneous tissue first 20 sq cm,Surgery,0.50,0.29
+11102,Tangential biopsy of skin single lesion,Surgery,0.81,0.46
+17000,Destruction benign/premalignant lesion first,Surgery,0.61,0.35
+17003,Destruction benign/premalignant lesion 2-14 each additional,Surgery,0.04,0.02
+20610,Arthrocentesis aspiration injection major joint,Medicine,0.90,0.51
+43239,Upper GI endoscopy with biopsy,Surgery,3.14,1.79
+45378,Colonoscopy diagnostic,Surgery,3.36,1.92
+45380,Colonoscopy with biopsy,Surgery,3.69,2.11
+45385,Colonoscopy with polypectomy snare,Surgery,4.53,2.59

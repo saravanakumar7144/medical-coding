@@ -1,0 +1,62 @@
+[
+    {
+        "code": "E0781",
+        "description": "Ambulatory infusion pump, single or multiple channels, electric or battery operated",
+        "type": "HCPCS",
+        "text_chunk": "Ambulatory infusion pump, single or multiple channels, electric or battery operated, with administrative equipment, worn by patient."
+    },
+    {
+        "code": "A4253",
+        "description": "Blood glucose test or reagent strips for home blood glucose monitor",
+        "type": "HCPCS",
+        "text_chunk": "Blood glucose test or reagent strips for home blood glucose monitor, per 50 strips. Used by diabetic patients for home glucose monitoring."
+    },
+    {
+        "code": "K0001",
+        "description": "Standard wheelchair",
+        "type": "HCPCS",
+        "text_chunk": "Standard wheelchair with fixed full length arms, footrests, and leg rests. Basic manual wheelchair for patient mobility."
+    },
+    {
+        "code": "E0470",
+        "description": "Respiratory assist device, bi-level pressure capability",
+        "type": "HCPCS",
+        "text_chunk": "Respiratory assist device, bi-level pressure capability, without backup rate feature, used with noninvasive interface."
+    },
+    {
+        "code": "A6250",
+        "description": "Skin sealants, protectants, moisturizers, ointments, any type, any size",
+        "type": "HCPCS",
+        "text_chunk": "Skin sealants, protectants, moisturizers, ointments, any type, any size. Topical preparations for wound care and skin protection."
+    },
+    {
+        "code": "L3806",
+        "description": "Wrist hand finger orthosis, includes one or more nontorsion joint(s)",
+        "type": "HCPCS",
+        "text_chunk": "Wrist hand finger orthosis, includes one or more nontorsion joint(s), turnbuckles, elastic bands/springs, may include soft interface material, straps, custom fabricated."
+    },
+    {
+        "code": "A0425",
+        "description": "Ground mileage, per statute mile",
+        "type": "HCPCS",
+        "text_chunk": "Ground mileage, per statute mile. Ambulance transport service billing for distance traveled."
+    },
+    {
+        "code": "E1390",
+        "description": "Oxygen concentrator, single delivery port, capable of delivering 85 percent or greater oxygen concentration",
+        "type": "HCPCS",
+        "text_chunk": "Oxygen concentrator, single delivery port, capable of delivering 85 percent or greater oxygen concentration at the prescribed flow rate."
+    },
+    {
+        "code": "A4224",
+        "description": "Supplies for maintenance of insulin infusion catheter, per week",
+        "type": "HCPCS",
+        "text_chunk": "Supplies for maintenance of insulin infusion catheter, per week. Including dressing changes and catheter care supplies."
+    },
+    {
+        "code": "L0972",
+        "description": "Lumbar-sacral orthosis, axilla-sacral, with shoulder straps, prefabricated",
+        "type": "HCPCS",
+        "text_chunk": "Lumbar-sacral orthosis, axilla-sacral, with shoulder straps, prefabricated, off-the-shelf. Back brace for lumbar spine support."
+    }
+]

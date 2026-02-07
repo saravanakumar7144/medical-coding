@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Coding AI - FastAPI Version</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            text-align: center;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h3 {
+            color: #007bff;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .code-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .code-approved {
+            border-left: 4px solid #28a745;
+        }
+        .code-warning {
+            border-left: 4px solid #ffc107;
+        }
+        .code-error {
+            border-left: 4px solid #dc3545;
+        }
+        .tab-container {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            background-color: #f8f9fa;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: white;
+            border-bottom: 1px solid white;
+            margin-bottom: -1px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .status-success { background-color: #28a745; }
+        .status-warning { background-color: #ffc107; }
+        .status-error { background-color: #dc3545; }
+        .status-info { background-color: #17a2b8; }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        .json-display {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Medical Coding AI - FastAPI Version</h1>
+            <p>AI-powered medical coding system with ICD-10, CPT, and HCPCS support</p>
+        </div>
+
+        <!-- System Status -->
+        <div class="section">
+            <h3>System Status</h3>
+            <div class="grid-3">
+                <div id="systemStatus">
+                    <p>Loading system status...</p>
+                </div>
+                <div id="sessionInfo">
+                    <p>No active session</p>
+                </div>
+                <div>
+                    <button onclick="createSession()">Create New Session</button>
+                    <button onclick="refreshStatus()">Refresh Status</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-container">
+            <div class="tab active" onclick="showTab('upload')">Upload Document</div>
+            <div class="tab" onclick="showTab('analysis')">AI Analysis</div>
+            <div class="tab" onclick="showTab('search')">Code Search</div>
+            <div class="tab" onclick="showTab('verification')">Verification</div>
+            <div class="tab" onclick="showTab('export')">Export</div>
+        </div>
+
+        <!-- Upload Document Tab -->
+        <div id="upload" class="tab-content active">
+            <div class="section">
+                <h3>Document Upload & Processing</h3>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label for="fileUpload">Upload Medical Document (PDF/TXT):</label>
+                            <input type="file" id="fileUpload" accept=".pdf,.txt">
+                        </div>
+                        <button onclick="uploadFile()">Process Document</button>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="textInput">Or Enter Text Directly:</label>
+                            <textarea id="textInput" rows="5" placeholder="Enter medical record text here..."></textarea>
+                        </div>
+                        <button onclick="processText()">Process Text</button>
+                    </div>
+                </div>
+                <div id="documentResult"></div>
+            </div>
+        </div>
+
+        <!-- AI Analysis Tab -->
+        <div id="analysis" class="tab-content">
+            <div class="section">
+                <h3>AI-Powered Medical Coding</h3>
+                <div class="form-group">
+                    <label>Select Analysis Options:</label>
+                    <div>
+                        <input type="checkbox" id="runICD10" checked> <label for="runICD10" style="display: inline;">ICD-10 Diagnosis Codes</label><br>
+                        <input type="checkbox" id="runCPT" checked> <label for="runCPT" style="display: inline;">CPT Procedure Codes</label><br>
+                        <input type="checkbox" id="runHCPCS"> <label for="runHCPCS" style="display: inline;">HCPCS Supply/Equipment</label>
+                    </div>
+                </div>
+                <button onclick="runAnalysis()">Analyze Document</button>
+                <div id="analysisResult"></div>
+            </div>
+        </div>
+
+        <!-- Code Search Tab -->
+        <div id="search" class="tab-content">
+            <div class="section">
+                <h3>Medical Code Search</h3>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label for="searchQuery">Search Query:</label>
+                            <input type="text" id="searchQuery" placeholder="e.g., 'diabetes', 'amputation', 'Z89.221'">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="codeType">Code Type:</label>
+                            <select id="codeType">
+                                <option value="all">All Codes</option>
+                                <option value="icd10">ICD-10</option>
+                                <option value="cpt">CPT</option>
+                                <option value="hcpcs">HCPCS</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="searchCodes()">Search Codes</button>
+                
+                <div class="section">
+                    <h4>Manual Code Entry</h4>
+                    <div class="grid">
+                        <div>
+                            <div class="form-group">
+                                <label for="manualCode">Code:</label>
+                                <input type="text" id="manualCode" placeholder="e.g., Z89.221, 99214, L6000">
+                            </div>
+                            <div class="form-group">
+                                <label for="manualDescription">Description:</label>
+                                <input type="text" id="manualDescription" placeholder="Enter code description">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label for="manualType">Code Type:</label>
+                                <select id="manualType">
+                                    <option value="ICD-10">ICD-10</option>
+                                    <option value="CPT">CPT</option>
+                                    <option value="HCPCS">HCPCS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="manualConfidence">Confidence (%):</label>
+                                <input type="range" id="manualConfidence" min="0" max="100" value="90">
+                                <span id="confidenceValue">90%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="addManualCode()">Add Manual Code</button>
+                </div>
+                
+                <div id="searchResult"></div>
+            </div>
+        </div>
+
+        <!-- Verification Tab -->
+        <div id="verification" class="tab-content">
+            <div class="section">
+                <h3>Code Verification</h3>
+                <div id="selectedCodes"></div>
+                <button onclick="verifyCodes()">Verify All Codes</button>
+                <div id="verificationResult"></div>
+            </div>
+        </div>
+
+        <!-- Export Tab -->
+        <div id="export" class="tab-content">
+            <div class="section">
+                <h3>Export Results</h3>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>Export Options:</label>
+                            <div>
+                                <input type="checkbox" id="includeVerification" checked> <label for="includeVerification" style="display: inline;">Include verification results</label><br>
+                                <input type="checkbox" id="includeConfidence" checked> <label for="includeConfidence" style="display: inline;">Include confidence scores</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button onclick="exportCSV()">Export as CSV</button>
+                        <button onclick="exportJSON()">Export as JSON</button>
+                    </div>
+                </div>
+                <div id="exportResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api';
+        let currentSessionId = null;
+        let selectedCodes = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshStatus();
+            
+            // Update confidence display
+            document.getElementById('manualConfidence').addEventListener('input', function() {
+                document.getElementById('confidenceValue').textContent = this.value + '%';
+            });
+        });
+
+        // Tab management
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Refresh selected codes when switching to verification or export tabs
+            if (tabName === 'verification' || tabName === 'export') {
+                refreshSelectedCodes();
+            }
+        }
+
+        // API calls
+        async function apiCall(endpoint, method = 'GET', data = null) {
+            try {
+                const options = {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                };
+                
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+                
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'API call failed');
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('API call error:', error);
+                throw error;
+            }
+        }
+
+        // System status
+        async function refreshStatus() {
+            try {
+                const status = await apiCall('/system/status');
+                const systemStatusDiv = document.getElementById('systemStatus');
+                
+                systemStatusDiv.innerHTML = `
+                    <h4>System Status</h4>
+                    <p><span class="status-indicator status-${status.ollama_status === 'connected' ? 'success' : 'error'}"></span>
+                       Ollama: ${status.ollama_status}</p>
+                    <p><strong>Model:</strong> ${status.model_name}</p>
+                    <p><strong>Sessions:</strong> ${status.total_sessions}</p>
+                `;
+                
+                // Update knowledge base status
+                if (status.knowledge_bases) {
+                    let kbStatus = '<h4>Knowledge Bases</h4>';
+                    for (const [kb, statusText] of Object.entries(status.knowledge_bases)) {
+                        const statusClass = statusText === 'ready' ? 'success' : 
+                                          statusText === 'needs_processing' ? 'warning' : 'error';
+                        kbStatus += `<p><span class="status-indicator status-${statusClass}"></span>${kb.toUpperCase()}: ${statusText}</p>`;
+                    }
+                    systemStatusDiv.innerHTML += kbStatus;
+                }
+            } catch (error) {
+                document.getElementById('systemStatus').innerHTML = `
+                    <div class="error">Error loading system status: ${error.message}</div>
+                `;
+            }
+        }
+
+        // Session management
+        async function createSession() {
+            try {
+                const response = await apiCall('/sessions', 'POST');
+                currentSessionId = response.session_id;
+                
+                document.getElementById('sessionInfo').innerHTML = `
+                    <h4>Active Session</h4>
+                    <p><strong>ID:</strong> ${currentSessionId.substring(0, 8)}...</p>
+                    <p><strong>Created:</strong> ${new Date(response.created_at).toLocaleString()}</p>
+                `;
+                
+                showMessage('Session created successfully!', 'success');
+            } catch (error) {
+                showMessage(`Error creating session: ${error.message}`, 'error');
+            }
+        }
+
+        // Document processing
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileUpload');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showMessage('Please select a file', 'error');
+                return;
+            }
+            
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                const response = await fetch(`${API_BASE}/document/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail);
+                }
+                
+                const result = await response.json();
+                currentSessionId = result.session_id;
+                
+                document.getElementById('documentResult').innerHTML = `
+                    <div class="success">
+                        <h4>Document Processed Successfully!</h4>
+                        <p><strong>File:</strong> ${result.filename}</p>
+                        <p><strong>Text Length:</strong> ${result.text_length} characters</p>
+                        <p><strong>Session ID:</strong> ${currentSessionId}</p>
+                    </div>
+                `;
+                
+                updateSessionInfo();
+            } catch (error) {
+                showMessage(`Error uploading file: ${error.message}`, 'error');
+            }
+        }
+
+        async function processText() {
+            const text = document.getElementById('textInput').value.trim();
+            
+            if (!text) {
+                showMessage('Please enter some text', 'error');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/document/process-text', 'POST', {
+                    text: text,
+                    document_type: 'medical_record'
+                });
+                
+                currentSessionId = result.session_id;
+                
+                document.getElementById('documentResult').innerHTML = `
+                    <div class="success">
+                        <h4>Text Processed Successfully!</h4>
+                        <p><strong>Text Length:</strong> ${result.text_length} characters</p>
+                        <p><strong>Session ID:</strong> ${currentSessionId}</p>
+                    </div>
+                `;
+                
+                updateSessionInfo();
+            } catch (error) {
+                showMessage(`Error processing text: ${error.message}`, 'error');
+            }
+        }
+
+        // AI Analysis
+        async function runAnalysis() {
+            if (!currentSessionId) {
+                showMessage('Please process a document first', 'error');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/analysis/run', 'POST', {
+                    session_id: currentSessionId,
+                    run_icd10: document.getElementById('runICD10').checked,
+                    run_cpt: document.getElementById('runCPT').checked,
+                    run_hcpcs: document.getElementById('runHCPCS').checked
+                });
+                
+                displayAnalysisResults(result);
+            } catch (error) {
+                showMessage(`Error running analysis: ${error.message}`, 'error');
+            }
+        }
+
+        function displayAnalysisResults(result) {
+            const analysisDiv = document.getElementById('analysisResult');
+            
+            if (result.suggested_codes && result.suggested_codes.length > 0) {
+                let html = `
+                    <div class="success">
+                        <h4>Analysis Complete!</h4>
+                        <p>Found ${result.total_codes} potential codes</p>
+                    </div>
+                    <h4>Suggested Codes</h4>
+                `;
+                
+                // Group codes by type
+                const codesByType = {};
+                result.suggested_codes.forEach(code => {
+                    const type = code.type || 'Unknown';
+                    if (!codesByType[type]) codesByType[type] = [];
+                    codesByType[type].push(code);
+                });
+                
+                for (const [type, codes] of Object.entries(codesByType)) {
+                    html += `<h5>${type} Codes (${codes.length})</h5>`;
+                    codes.forEach((code, index) => {
+                        const confidence = Math.round((code.confidence || 0) * 100);
+                        const confidenceClass = confidence >= 80 ? 'success' : confidence >= 60 ? 'warning' : 'error';
+                        
+                        html += `
+                            <div class="code-card code-${confidenceClass}">
+                                <h4>${code.code} - ${code.description}</h4>
+                                <p><strong>Confidence:</strong> ${confidence}%</p>
+                                <p><strong>Evidence:</strong> ${code.reasoning || code.evidence || 'N/A'}</p>
+                                <button onclick="selectCode('${code.code}', '${code.description}', '${code.type}', ${code.confidence}, '${code.reasoning || 'AI suggested'}', 'ai_analysis')">
+                                    Select Code
+                                </button>
+                            </div>
+                        `;
+                    });
+                }
+                
+                analysisDiv.innerHTML = html;
+            } else {
+                analysisDiv.innerHTML = `
+                    <div class="error">
+                        <h4>No codes found</h4>
+                        <p>Try adjusting analysis options or document content.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Code Search
+        async function searchCodes() {
+            const query = document.getElementById('searchQuery').value.trim();
+            const codeType = document.getElementById('codeType').value;
+            
+            if (!query) {
+                showMessage('Please enter a search query', 'error');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/codes/search', 'POST', {
+                    query: query,
+                    code_type: codeType
+                });
+                
+                displaySearchResults(result);
+            } catch (error) {
+                showMessage(`Error searching codes: ${error.message}`, 'error');
+            }
+        }
+
+        function displaySearchResults(result) {
+            const searchDiv = document.getElementById('searchResult');
+            
+            if (result.results && result.results.length > 0) {
+                let html = `
+                    <div class="success">
+                        <h4>Search Results</h4>
+                        <p>Found ${result.total_results} results for "${result.query}"</p>
+                    </div>
+                `;
+                
+                result.results.forEach(code => {
+                    const relevance = Math.round((code.relevance_score || 0) * 100);
+                    
+                    html += `
+                        <div class="code-card">
+                            <h4>${code.code} - ${code.description}</h4>
+                            <p><strong>Type:</strong> ${code.type} | <strong>Relevance:</strong> ${relevance}%</p>
+                            <button onclick="selectCode('${code.code}', '${code.description}', '${code.type}', ${code.relevance_score || 0.8}, 'Manual selection from search results', 'manual_search')">
+                                Select Code
+                            </button>
+                        </div>
+                    `;
+                });
+                
+                searchDiv.innerHTML = html;
+            } else {
+                searchDiv.innerHTML = `
+                    <div class="error">
+                        <h4>No results found</h4>
+                        <p>No results found for "${result.query}" in ${result.code_type} codes</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function addManualCode() {
+            if (!currentSessionId) {
+                showMessage('Please create a session first', 'error');
+                return;
+            }
+            
+            const code = document.getElementById('manualCode').value.trim();
+            const description = document.getElementById('manualDescription').value.trim();
+            const codeType = document.getElementById('manualType').value;
+            const confidence = document.getElementById('manualConfidence').value / 100;
+            
+            if (!code || !description) {
+                showMessage('Please enter both code and description', 'error');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/codes/manual-add', 'POST', {
+                    session_id: currentSessionId,
+                    code: code,
+                    description: description,
+                    code_type: codeType,
+                    confidence: confidence
+                });
+                
+                showMessage(`Added ${result.added_code.code} successfully!`, 'success');
+                
+                // Clear form
+                document.getElementById('manualCode').value = '';
+                document.getElementById('manualDescription').value = '';
+                
+                refreshSelectedCodes();
+            } catch (error) {
+                showMessage(`Error adding code: ${error.message}`, 'error');
+            }
+        }
+
+        // Code Selection
+        async function selectCode(code, description, type, confidence, reasoning, source) {
+            if (!currentSessionId) {
+                showMessage('Please create a session first', 'error');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/codes/select?session_id=' + currentSessionId, 'POST', {
+                    code: code,
+                    description: description,
+                    type: type,
+                    confidence: confidence,
+                    reasoning: reasoning,
+                    source: source
+                });
+                
+                showMessage(`Selected ${code} successfully!`, 'success');
+                refreshSelectedCodes();
+            } catch (error) {
+                showMessage(`Error selecting code: ${error.message}`, 'error');
+            }
+        }
+
+        async function refreshSelectedCodes() {
+            if (!currentSessionId) return;
+            
+            try {
+                const result = await apiCall(`/codes/selected/${currentSessionId}`);
+                selectedCodes = result.selected_codes;
+                
+                const selectedDiv = document.getElementById('selectedCodes');
+                
+                if (selectedCodes.length > 0) {
+                    let html = `
+                        <h4>Selected Codes (${selectedCodes.length})</h4>
+                    `;
+                    
+                    selectedCodes.forEach(code => {
+                        const confidence = Math.round((code.confidence || 0) * 100);
+                        
+                        html += `
+                            <div class="code-card code-approved">
+                                <h4>${code.code} - ${code.description}</h4>
+                                <p><strong>Type:</strong> ${code.type} | <strong>Confidence:</strong> ${confidence}%</p>
+                                <p><strong>Source:</strong> ${code.source}</p>
+                                <button onclick="removeCode('${code.code}')">Remove</button>
+                            </div>
+                        `;
+                    });
+                    
+                    selectedDiv.innerHTML = html;
+                } else {
+                    selectedDiv.innerHTML = '<p>No codes selected yet.</p>';
+                }
+            } catch (error) {
+                console.error('Error refreshing selected codes:', error);
+            }
+        }
+
+        async function removeCode(code) {
+            if (!currentSessionId) return;
+            
+            try {
+                await apiCall(`/codes/selected/${currentSessionId}/${encodeURIComponent(code)}`, 'DELETE');
+                showMessage(`Removed ${code} successfully!`, 'success');
+                refreshSelectedCodes();
+            } catch (error) {
+                showMessage(`Error removing code: ${error.message}`, 'error');
+            }
+        }
+
+        // Verification
+        async function verifyCodes() {
+            if (!currentSessionId) {
+                showMessage('Please create a session first', 'error');
+                return;
+            }
+            
+            if (selectedCodes.length === 0) {
+                showMessage('No codes selected for verification', 'error');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/codes/verify', 'POST', {
+                    session_id: currentSessionId,
+                    codes: selectedCodes
+                });
+                
+                displayVerificationResults(result);
+            } catch (error) {
+                showMessage(`Error verifying codes: ${error.message}`, 'error');
+            }
+        }
+
+        function displayVerificationResults(result) {
+            const verificationDiv = document.getElementById('verificationResult');
+            
+            if (result.verification_results && result.verification_results.length > 0) {
+                let html = `
+                    <div class="success">
+                        <h4>Verification Complete</h4>
+                        <p>Verified ${result.total_verified} codes</p>
+                    </div>
+                    <h4>Verification Results</h4>
+                `;
+                
+                result.verification_results.forEach(verification => {
+                    const status = verification.status || 'unknown';
+                    const statusClass = status === 'approved' ? 'approved' : 
+                                      status === 'approved_with_review' ? 'warning' : 
+                                      status === 'needs_review' ? 'warning' : 'error';
+                    
+                    const statusIcon = status === 'approved' ? '✅' : 
+                                     status === 'approved_with_review' ? '⚠️' : 
+                                     status === 'needs_review' ? '📋' : '❌';
+                    
+                    html += `
+                        <div class="code-card code-${statusClass}">
+                            <h4>${statusIcon} ${verification.code} - ${verification.description}</h4>
+                            <p><strong>Status:</strong> ${status.replace('_', ' ').toUpperCase()}</p>
+                            <p><strong>Score:</strong> ${Math.round(verification.verification_confidence || 0)}%</p>
+                            <p><strong>Concerns:</strong> ${verification.concerns || 'None'}</p>
+                            <p><strong>Recommendations:</strong> ${verification.recommendations || 'None'}</p>
+                        </div>
+                    `;
+                });
+                
+                verificationDiv.innerHTML = html;
+            } else {
+                verificationDiv.innerHTML = `
+                    <div class="error">
+                        <h4>Verification Failed</h4>
+                        <p>No verification results available.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Export
+        async function exportCSV() {
+            if (!currentSessionId) {
+                showMessage('Please create a session first', 'error');
+                return;
+            }
+            
+            const includeVerification = document.getElementById('includeVerification').checked;
+            const includeConfidence = document.getElementById('includeConfidence').checked;
+            
+            try {
+                const result = await apiCall(
+                    `/export/${currentSessionId}/csv?include_verification=${includeVerification}&include_confidence=${includeConfidence}`
+                );
+                
+                // Create download link
+                const blob = new Blob([result.data], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = result.filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                showMessage('CSV export downloaded successfully!', 'success');
+            } catch (error) {
+                showMessage(`Error exporting CSV: ${error.message}`, 'error');
+            }
+        }
+
+        async function exportJSON() {
+            if (!currentSessionId) {
+                showMessage('Please create a session first', 'error');
+                return;
+            }
+            
+            const includeVerification = document.getElementById('includeVerification').checked;
+            const includeConfidence = document.getElementById('includeConfidence').checked;
+            
+            try {
+                const result = await apiCall(
+                    `/export/${currentSessionId}/json?include_verification=${includeVerification}&include_confidence=${includeConfidence}`
+                );
+                
+                // Create download link
+                const blob = new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `medical_codes_${currentSessionId}_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                showMessage('JSON export downloaded successfully!', 'success');
+            } catch (error) {
+                showMessage(`Error exporting JSON: ${error.message}`, 'error');
+            }
+        }
+
+        // Helper functions
+        function updateSessionInfo() {
+            if (currentSessionId) {
+                document.getElementById('sessionInfo').innerHTML = `
+                    <h4>Active Session</h4>
+                    <p><strong>ID:</strong> ${currentSessionId.substring(0, 8)}...</p>
+                    <p><strong>Status:</strong> Active</p>
+                `;
+            }
+        }
+
+        function showMessage(message, type) {
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type;
+            messageDiv.textContent = message;
+            
+            // Insert at top of body
+            document.body.insertBefore(messageDiv, document.body.firstChild);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.parentNode.removeChild(messageDiv);
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
